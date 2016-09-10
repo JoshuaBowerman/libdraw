@@ -1,0 +1,80 @@
+/* license */
+#ifndef LIBDRAW_VERSION_H
+#define LIBDRAW_VERSION_H
+
+#if !defined(LIBDRAW_INSIDE) && !defined(LIBDRAW_COMPILATION)
+# error "Only <libdraw.h> can be included directly."
+#endif
+
+/**
+ * SECTION:libdraw-version
+ * @short_description: libdraw version checking
+ *
+ * libdraw provides macros to check the version of the library
+ * at compile-time
+ */
+
+/**
+ * LIBDRAW_MAJOR_VERSION:
+ *
+ * libdraw major version component (e.g. 1 if %LIBDRAW_VERSION is 1.2.3)
+ */
+#define LIBDRAW_MAJOR_VERSION (@MAJOR_VERSION@)
+
+/**
+ * LIBDRAW_MINOR_VERSION:
+ *
+ * libdraw minor version component (e.g. 2 if %LIBDRAW_VERSION is 1.2.3)
+ */
+#define LIBDRAW_MINOR_VERSION (@MINOR_VERSION@)
+
+/**
+ * LIBDRAW_MICRO_VERSION:
+ *
+ * libdraw micro version component (e.g. 3 if %LIBDRAW_VERSION is 1.2.3)
+ */
+#define LIBDRAW_MICRO_VERSION (@MICRO_VERSION@)
+
+/**
+ * LIBDRAW_VERSION
+ *
+ * libdraw version.
+ */
+#define LIBDRAW_VERSION (@VERSION@)
+
+/**
+ * LIBDRAW_VERSION_S:
+ *
+ * libdraw version, encoded as a string, useful for printing and
+ * concatenation.
+ */
+#define LIBDRAW_VERSION_S "@VERSION@"
+
+#define LIBDRAW_ENCODE_VERSION(major,minor,micro) \
+        ((major) << 24 | (minor) << 16 | (micro) << 8)
+
+/**
+ * LIBDRAW_VERSION_HEX:
+ *
+ * libdraw version, encoded as an hexadecimal number, useful for
+ * integer comparisons.
+ */
+#define LIBDRAW_VERSION_HEX \
+        (LIBDRAW_ENCODE_VERSION (LIBDRAW_MAJOR_VERSION, LIBDRAW_MINOR_VERSION, LIBDRAW_MICRO_VERSION))
+
+/**
+ * LIBDRAW_CHECK_VERSION:
+ * @major: required major version
+ * @minor: required minor version
+ * @micro: required micro version
+ *
+ * Compile-time version checking. Evaluates to %TRUE if the version
+ * of libdraw is greater than the required one.
+ */
+#define LIBDRAW_CHECK_VERSION(major,minor,micro)   \
+        (LIBDRAW_MAJOR_VERSION > (major) || \
+         (LIBDRAW_MAJOR_VERSION == (major) && LIBDRAW_MINOR_VERSION > (minor)) || \
+         (LIBDRAW_MAJOR_VERSION == (major) && LIBDRAW_MINOR_VERSION == (minor) && \
+          LIBDRAW_MICRO_VERSION >= (micro)))
+
+#endif /* LIBDRAW_VERSION_H */

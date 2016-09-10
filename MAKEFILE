@@ -1,0 +1,14 @@
+
+
+
+
+test: tests.o libglyph.o libdraw.o
+	cc -o test tests.o libglyph.o libdraw.o
+
+tests.o: tests.c libglyph.h libdraw.h
+	cc tests.c
+
+libglyph.o: libglyph.c libglyph.h libdraw.h
+	cc libglyph.c
+
+libdraw.o:
